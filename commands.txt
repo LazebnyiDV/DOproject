@@ -1,0 +1,9 @@
+nginx:
+
+sudo service nginx restart
+systemctl status nginx
+
+apache:
+
+sudo service httpd restart
+systemctl status httpd
