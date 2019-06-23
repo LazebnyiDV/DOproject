@@ -7,3 +7,34 @@ apache:
 
 sudo service httpd restart
 systemctl status httpd
+
+ansible:
+sudo pip install ansible
+cd .ssh
+sudo chmod 400 Alex-key-Ohio.pem
+pwd
+mkdir ansible
+cd ansible
+
+nano hosts.txt
+[prod_servers]
+linux1 ansible_host=3.13.145.59
+
+[prod_servers:vars]
+ansible_user=ec2-user
+ansible_ssh_private_key_file=/home/ec2-user/.ssh/Alex-key-Ohio.pem
+
+nano ansible.cfg
+[defaults]
+host_key_checking = false
+inventory	  = ./hosts.txt
+
+jenkins:
+ansible all -m ping
+ansible all -m shell -a "docker ps" -b
+ansible all -m shell -a "docker ps -a" -b
+ansible all -m shell -a "docker start d4d64cca289f" -b
+ansible all -m shell -a "docker ps" -b
+
+ending:
+ansible all -m shell -a "docker stop d4d64cca289f" -b
