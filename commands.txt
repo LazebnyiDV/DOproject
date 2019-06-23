@@ -38,3 +38,4 @@ ansible all -m shell -a "docker ps" -b
 
 ending:
 ansible all -m shell -a "docker stop d4d64cca289f" -b
+.
